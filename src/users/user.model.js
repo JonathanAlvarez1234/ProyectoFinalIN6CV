@@ -4,12 +4,12 @@ const UserSchema = Schema(
     {
         name: {
             type: String,
-            required: [true, "Name is required"],
+            required: true,
             maxLength: 20
         },
         surname: {
             type: String,
-            required: [true, "Surname is required"],
+            required: true,
             maxLength: 20
         },
         username: {
@@ -18,7 +18,7 @@ const UserSchema = Schema(
         },
         email: {
             type: String,
-            required: [true, "El correo en necesario"],
+            required: true,
             unique: true
         },
         password: {
@@ -56,4 +56,4 @@ UserSchema.methods.toJSON = function () {
     
 }
 
-export default model('User', UserSchema);
+export default model('Usuario', UserSchema);
