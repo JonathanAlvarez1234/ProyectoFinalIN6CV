@@ -4,13 +4,26 @@ import mongoose from "mongoose";
 
 export const saveCategoria = async (req, res) => {
     try {
-        if (req.user.role !== "ADMIN_ROLE") {
+        const { name, descripcion } = req.body;
+        if (req.usuario.role !== "ADMIN_ROLE") {
             return res.status(403).json({
                 success: false,
                 msg: "Solo un administrador puede crear una nueva categoria"
             });
         }
-        const { name, descripcion } = req.body;
+        const categoriaExistente = await Categoria.findOne({ name });
+        if (categoriaExistente) {
+            return res.status(400).json({
+                success: false,
+                msg: "La categoría ya existe"
+            });
+        }
+        if (!name || !descripcion) {
+            return res.status(400).json({
+                success: false,
+                msg: "El nombre y la descripción son obligatorios"
+            });
+        }
         const categoria = new Categoria({ name, descripcion });
         await categoria.save();
 
@@ -47,7 +60,7 @@ export const getCategorias = async (req, res) => {
 
 export const updateCategoria = async (req, res) => {
     try {
-        if (req.user.role !== "ADMIN_ROLE") {
+        if (req.usuario.role !== "ADMIN_ROLE") {
             return res.status(403).json({
                 success: false,
                 msg: "No tienes permisos para actualizar una categoria"
@@ -80,74 +93,54 @@ export const updateCategoria = async (req, res) => {
     }
 };
 
-const CATEGORIA_GENERAL = "General";
-
 export const deleteCategoria = async (req, res) => {
-    const session = await mongoose.startSession();
-    session.startTransaction();
-
     try {
-        if (req.user.role !== "ADMIN_ROLE") {
-            await session.abortTransaction();
-            session.endSession();
+        const { id } = req.params;
+        if (!req.usuario || req.usuario.role !== "ADMIN_ROLE") {
             return res.status(403).json({
                 success: false,
-                msg: "Solo un administrador puede eliminar una categoria"
+                message: "Solo un administrador puede eliminar una categoría"
             });
         }
-        const { id } = req.params;
-        const categoria = await Categoria.findByIdAndUpdate(id, { state: false }, { new: true }).setOptions({ session });
+        const categoria = await Categoria.findById(id);
         if (!categoria) {
-            await session.abortTransaction();
-            session.endSession();
             return res.status(404).json({
                 success: false,
-                msg: "Categoria no encontrada"
+                message: "Categoría no encontrada"
             });
         }
-        let categoriaGeneral = await Categoria.findOne({ name: CATEGORIA_GENERAL }).setOptions({ session });
-        if (!categoriaGeneral) {
-            categoriaGeneral = new Categoria({
-                name: CATEGORIA_GENERAL,
-                descripcion: "Categoria predeterminada"
+        const defaultCategory = await Categoria.findOne({ name: "General" });
+        if (!defaultCategory) {
+            return res.status(500).json({
+                success: false,
+                message: "No se encontro la categoria por defecto"
             });
-            await categoriaGeneral.save({ session });
         }
-        await Producto.updateMany(
-            { category: id },
-            { category: categoriaGeneral._id }
-        ).setOptions({ session });
-        await session.commitTransaction();
-        session.endSession();
+        await Producto.updateMany({ category: id }, { category: defaultCategory._id });
+        await Categoria.findByIdAndUpdate(id, { state: false }, { new: true });
         res.status(200).json({
             success: true,
-            msg: "Categoria eliminada y productos reasignados a 'General'",
-            categoria
+            message: "Categoria eliminada, productos cambiados de categoria"
         });
     } catch (error) {
-        await session.abortTransaction();
-        session.endSession();
         res.status(500).json({
             success: false,
-            msg: "Error al eliminar la categoria",
-            error: error.message
+            message: "Error al eliminar la categoria",
+            error: error.message 
         });
     }
 };
 
 export const createCategory = async () => {
     try {
-        while (mongoose.connection.readyState !== 1) {
-            console.warn("Conexión a Mongoose");
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+        const defaultCategory = await Categoria.findOne({ name: "General" });
+        if (!defaultCategory) {
+            await Categoria.create({ name: "General" });
+            console.log("Categoria 'General' creada por defecto");
+        } else {
+            console.log("Categoria por defecto ya existente");
         }
-        const categoria = await Categoria.findOneAndUpdate(
-            { name: CATEGORIA_GENERAL },
-            { name: CATEGORIA_GENERAL, descripcion: "Categoria por defecto" },
-            { upsert: true, new: true }
-        );
-        console.log(`Categoria '${CATEGORIA_GENERAL}' creada`);
     } catch (error) {
-        console.error("Error al crear la categoria 'General':", error);
+        console.error("Error al crear la categoria", error);
     }
 };

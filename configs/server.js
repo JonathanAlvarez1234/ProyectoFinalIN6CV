@@ -7,6 +7,7 @@ import morgan from "morgan";
 import { dbConnection } from "./mongo.js";
 import limiter from '../src/middlewares/validar-cant-peticiones.js'
 import authRoutes from '../src/auth/auth.routes.js'
+import usuarioRoutes from '../src/users/user.routes.js'
 import { createCategory } from "../src/categorias/categoria.controller.js";
 import categoriaRoutes from '../src/categorias/categoria.routes.js'
 import productoRoutes from '../src/productos/producto.routes.js'
@@ -22,6 +23,7 @@ const middlewares = (app) => {
 
 const routes = (app) =>{
         app.use("/proyectoFinal/v1/auth", authRoutes);
+        app.use("/proyectoFinal/v1/usuario", usuarioRoutes);
         app.use("/proyectoFinal/v1/categoria", categoriaRoutes);
         app.use("/proyectoFinal/v1/producto", productoRoutes);
 }

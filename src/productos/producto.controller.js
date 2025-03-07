@@ -3,7 +3,7 @@ import Categoria from "../categorias/categoria.model.js"
 
 export const saveProducto = async (req, res) => {
     try {
-        if (req.user.role !== "ADMIN_ROLE") {
+        if (req.usuario.role !== "ADMIN_ROLE") {
             return res.status(403).json({
                 success: false,
                 msg: "Solo un administrador puede crear productos",
@@ -51,7 +51,7 @@ export const saveProducto = async (req, res) => {
 export const getProductos = async (req, res) => {
     try {
         const productos = await Producto.find()
-       .populate('categoria', 'name');
+       .populate('category', 'name');
         res.status(200).json({
             success: true,
             msg: "Productos obtenidos correctamente",
@@ -60,14 +60,15 @@ export const getProductos = async (req, res) => {
        } catch (error) {
         console.error(error);
         res.status(500).json({
-            msg: "Hubo un error en la obtención de productos"
+            msg: "Hubo un error en la obtención de productos",
+            error: error.message
         });
        }
 }
 
 export const updateProducto = async (req, res) => {
     try {
-        if (req.user.role !== "ADMIN_ROLE") {
+        if (req.usuario.role !== "ADMIN_ROLE") {
             return res.status(403).json({
                 success: false,
                 msg: "No tienes permisos para actualizar un producto",
@@ -120,7 +121,7 @@ export const updateProducto = async (req, res) => {
 
 export const deleteProducto = async (req, res) => {
     try {
-        if (req.user.role !== "ADMIN_ROLE") {
+        if (req.usuario.role !== "ADMIN_ROLE") {
             return res.status(403).json({
                 success: false,
                 msg: "Usted no puede eliminar productos"
@@ -150,7 +151,7 @@ export const deleteProducto = async (req, res) => {
 
 export const productosAgotados = async (req, res) => {
     try {
-        if (req.user.role !== "ADMIN_ROLE") {
+        if (req.usuario.role !== "ADMIN_ROLE") {
             return res.status(403).json({
                 success: false,
                 msg: "Usted no puede ver productos agotados"
@@ -178,36 +179,63 @@ export const productosAgotados = async (req, res) => {
     }
 };
 
-/*
-export const productosMasVendidos = async (req, res) => {
+export const comprarProducto = async (req, res) => {
     try {
-        if (req.user.role !== "ADMIN_ROLE") {
-            return res.status(403).json({
+        const { id } = req.params;
+        const { cantidad } = req.body;
+        if (!cantidad || cantidad <= 0) {
+            return res.status(400).json({
                 success: false,
-                msg: "Usted no puede ver los productos mas vendidos"
+                msg: "La cantidad debe ser mayor a 0"
             });
         }
-        const productos = await Producto.find({ state: true })
-            .sort({ ventas: -1 })
-            .limit(10);
-
-        if (productos.length === 0) {
-            return res.status(200).json({
-                success: true,
-                msg: "No hay productos vendidos aun",
-                productos: []
+        const producto = await Producto.findById(id);
+        if (!producto) {
+            return res.status(404).json({
+                success: false,
+                msg: "Producto no encontrado"
             });
         }
+        if (producto.stock < cantidad) {
+            return res.status(400).json({
+                success: false,
+                msg: "Stock insuficiente"
+            });
+        }
+        producto.stock -= cantidad;
+        producto.numVenta += cantidad;
+        await producto.save();
         res.status(200).json({
             success: true,
-            total: productos.length,
-            productos
+            msg: "Compra realizada exitosamente",
+            producto
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            msg: "Error al obtener los productos más vendidos",
+            msg: "Error al realizar la compra",
             error: error.message
         });
     }
-};*/
+};
+
+export const productosMasVendidos = async (req, res) => {
+    try {
+        const productos = await Producto.find()
+            .sort({ numVenta: -1 })
+            .limit(10);
+
+        res.status(200).json({
+            success: true,
+            msg: "Productos mas vendidos",
+            productos
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            msg: "Error al obtener los productos mas vendidos",
+            error: error.message
+        });
+    }
+};

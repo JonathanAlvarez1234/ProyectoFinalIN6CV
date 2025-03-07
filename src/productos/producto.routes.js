@@ -1,7 +1,6 @@
 import { Router } from "express";
-import { saveProducto, getProductos, updateProducto, deleteProducto, productosAgotados } from "./producto.controller.js";
+import { saveProducto, getProductos, updateProducto, deleteProducto, productosAgotados, comprarProducto, productosMasVendidos } from "./producto.controller.js";
 import { validarJWT } from "../middlewares/validar-jwt.js";
-import { tieneRole } from "../middlewares/validar-roles.js";
 import { validarCampos } from "../middlewares/validar-campos.js";
 
 const router = Router();
@@ -17,9 +16,7 @@ router.post(
 
 router.get("/", getProductos);
 
-router.get("/", validarJWT, productosAgotados);
-
-//router.get("/", );
+router.get("/agotados", validarJWT, productosAgotados);
 
 router.put(
     "/:id",
@@ -37,5 +34,9 @@ router.delete(
     ],
     deleteProducto
 );
+
+router.put("/comprar/:id", comprarProducto)
+
+router.get("/masVendidos", productosMasVendidos)
 
 export default router;

@@ -59,6 +59,7 @@ export const register = async (req, res) => {
             email: data.email,
             phone: data.phone,
             password: encryptedPassword,
+            role: data.role
         })
 
         return res.status(201).json({

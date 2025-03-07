@@ -1,11 +1,11 @@
-import { hash } from "argon2";
+//import { hash } from "argon2";
 import Usuario from "./user.model.js";
 
 export const getUsers = async (req, res) => {
     try {
         const { limite = 10, desde = 0 } = req.query;
         const query = { state: true };
-        if (req.user.role !== "ADMIN_ROLE") {
+        if (req.usuario.role !== "ADMIN_ROLE") {
             return res.status(403).json({
                 success: false,
                 msg: "Usted puede ver unicamente sus datos"
@@ -31,53 +31,40 @@ export const getUsers = async (req, res) => {
     }
 };
 
-export const getUserById = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const user = await Usuario.findById(id);
-        if (!user) {
-            return res.status(404).json({
-                success: false,
-                msg: 'Usuario no encontrado'
-            });
-        }
-        res.status(200).json({
-            success: true,
-            user
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            msg: 'Error al obtener usuario',
-            error
-        });
-    }
-};
-
 export const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
         const { _id, password, email, role, ...data } = req.body;
-        if (role && req.user.role !== "ADMIN_ROLE") {
+        if (req.usuario.role !== "ADMIN_ROLE") {
             return res.status(403).json({
                 success: false,
                 msg: "Solo un administrador puede actualizar roles"
             });
         }
-        if (password) {
-            data.password = await hash(password);
+        if (email) {
+            data.email = email;
         }
-        const user = await Usuario.findByIdAndUpdate(id, data, { new: true });
+        const user = await Usuario.findByIdAndUpdate(id, data, { 
+            new: true, 
+            runValidators: true 
+        });
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                msg: "Usuario no encontrado"
+            });
+        }
         res.status(200).json({
             success: true,
-            msg: 'Usuario actualizado',
+            msg: "Usuario actualizado",
             user
         });
     } catch (error) {
+        console.error(error);
         res.status(500).json({
             success: false,
-            msg: 'Error al actualizar usuario',
-            error
+            msg: "Error al actualizar usuario",
+            error: error.message
         });
     }
 };
@@ -85,7 +72,7 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
-        if (req.user._id.toString() !== id && req.user.role !== "ADMIN_ROLE") {
+        if (req.usuario._id.toString() !== id && req.usuario.role !== "ADMIN_ROLE") {
             return res.status(403).json({
                 success: false,
                 msg: "No puede eliminar a otro usuario"

@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const productchema = Schema(
+const productSchema = Schema(
     {
         name: {
             type: String,
@@ -26,6 +26,10 @@ const productchema = Schema(
             required: true,
             min: [0, "EL stock tiene que ser arriba de 0"]
         },
+        numVenta: {
+            type: Number,
+            default: 0
+        },
         state: {
             type: Boolean,
             default: true,
@@ -37,11 +41,10 @@ const productchema = Schema(
         }
 );
 
-productchema.methods.toJSON = function () {
+productSchema.methods.toJSON = function () {
     const { __v, _id, ...producto } = this.toObject();
     producto.uid = _id;
     return producto;
-    
 }
 
-export default model('Producto', productchema);
+export default model('Producto', productSchema);
