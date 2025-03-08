@@ -1,0 +1,100 @@
+[{
+  "_id": {
+    "$oid": "67ca9fafdcdb4487a44a57a3"
+  },
+  "name": "Laptop Asus",
+  "price": 3000,
+  "description": "Decente para trabajar",
+  "category": {
+    "$oid": "67ca97abadca64fd49760195"
+  },
+  "stock": 14,
+  "numVenta": 1,
+  "state": false,
+  "createdAt": {
+    "$date": "2025-03-07T07:26:39.725Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-07T08:21:55.138Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67caa59ddcdb4487a44a57a8"
+  },
+  "name": "Audifonos Moto Buds",
+  "price": 300,
+  "description": "Buen audio",
+  "category": {
+    "$oid": "67ca97abadca64fd49760195"
+  },
+  "stock": 25,
+  "numVenta": 0,
+  "state": true,
+  "createdAt": {
+    "$date": "2025-03-07T07:51:57.022Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-07T07:51:57.022Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67caa5ccdcdb4487a44a57ad"
+  },
+  "name": "Sandia",
+  "price": 300,
+  "description": "Dulce",
+  "category": {
+    "$oid": "67ca81bd2086cd11035bd1f7"
+  },
+  "stock": 35,
+  "numVenta": 0,
+  "state": true,
+  "createdAt": {
+    "$date": "2025-03-07T07:52:44.250Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-07T08:13:16.044Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67cbd3680f86413dad8da260"
+  },
+  "name": "Reloj Chaomi",
+  "price": 300,
+  "description": "Indica la hora",
+  "category": {
+    "$oid": "67ca97abadca64fd49760195"
+  },
+  "stock": 33,
+  "numVenta": 0,
+  "state": true,
+  "createdAt": {
+    "$date": "2025-03-08T05:19:36.729Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-08T08:04:26.787Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67cbf995f7654682c9db73c1"
+  },
+  "name": "Teclado de computadora",
+  "price": 150,
+  "description": "Teclas RGB",
+  "category": {
+    "$oid": "67ca97abadca64fd49760195"
+  },
+  "stock": 42,
+  "numVenta": 2,
+  "state": true,
+  "createdAt": {
+    "$date": "2025-03-08T08:02:29.685Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-08T08:40:32.740Z"
+  }
+}]

@@ -1,6 +1,5 @@
 import Categoria from "../categorias/categoria.model.js";
 import Producto from "../productos/producto.model.js"
-import mongoose from "mongoose";
 
 export const saveCategoria = async (req, res) => {
     try {

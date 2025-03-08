@@ -1,0 +1,114 @@
+[{
+  "_id": {
+    "$oid": "67ca6e03d7111f54d988f205"
+  },
+  "name": "Dylan",
+  "surname": "OXcal",
+  "username": "0xcal",
+  "email": "jaguilar@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$UXRk8V5+Nc0Ak1m1aFkpLw$bAW1Nsbc9Z8L2SuBAq2LbA7a7qBehKSqY81ZWpD3sWo",
+  "phone": "50006000",
+  "role": "CLIENT_ROLE",
+  "state": false,
+  "createdAt": {
+    "$date": "2025-03-07T03:54:43.125Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-07T06:47:05.677Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67ca7875be276160d749288a"
+  },
+  "name": "Jonathan",
+  "surname": "Alvarez",
+  "username": "JONAS",
+  "email": "jalvarez@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$k4jU4Xe1HuWLSB2u8nDnKQ$bCt5iNr5jaTN4ELfUomSvBxn7KuaxrfZ954T3M8YPjA",
+  "phone": "51316646",
+  "role": "ADMIN_ROLE",
+  "state": true,
+  "createdAt": {
+    "$date": "2025-03-07T04:39:17.644Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-07T04:39:17.644Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67ca8f8b92da62bc82be0af5"
+  },
+  "name": "Andril",
+  "surname": "Aguilar",
+  "username": "Joseap",
+  "email": "jlopez@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$GfkL3gzk/X53wehIXlb6wA$zVlN6HWaeNEbELZe0jXDky7iLCIsOs7kuB2wWqsEFVA",
+  "phone": "45453232",
+  "role": "CLIENT_ROLE",
+  "state": true,
+  "createdAt": {
+    "$date": "2025-03-07T06:17:47.265Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-07T06:38:08.100Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67cbd2380f86413dad8da250"
+  },
+  "name": "Jorge",
+  "surname": "Peralta",
+  "username": "Pepa",
+  "email": "jperalt@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$i31X+vGkpyVMkHgg16JINw$YVXnAvk3UoWYmcsEjPsjt84GHCi9XysfUtrm+f97M70",
+  "phone": "12234556",
+  "role": "CLIENT_ROLE",
+  "state": true,
+  "createdAt": {
+    "$date": "2025-03-08T05:14:32.612Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-08T05:14:32.612Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67cbd26b0f86413dad8da253"
+  },
+  "name": "Jose",
+  "surname": "Ajcu",
+  "username": "Chepe",
+  "email": "jajcu@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$ihRmuXP/5Chnu33ySAa4BA$GdcY97Saw3IjTAUPx9u856Wwa4pvPYtrBA7sJmmQRH0",
+  "phone": "98745632",
+  "role": "CLIENT_ROLE",
+  "state": true,
+  "createdAt": {
+    "$date": "2025-03-08T05:15:23.951Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-08T05:15:23.951Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67cbd2b40f86413dad8da256"
+  },
+  "name": "Rene",
+  "surname": "Rosas",
+  "username": "Crosas",
+  "email": "crosas@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$wDkXjvxM/axSVnsZupHhiQ$3UfzcMdJ5+eUIQeaG8sjoFdnTP3s1wjpdpiifEb3u4c",
+  "phone": "55558888",
+  "role": "CLIENT_ROLE",
+  "state": true,
+  "createdAt": {
+    "$date": "2025-03-08T05:16:36.372Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-08T05:16:36.372Z"
+  }
+}]

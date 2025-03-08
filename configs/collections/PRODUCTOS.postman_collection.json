@@ -1,0 +1,234 @@
+{
+	"info": {
+		"_postman_id": "006ef687-83d6-4d59-b1a1-9c090f0f8cbc",
+		"name": "PRODUCTOS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37557519"
+	},
+	"item": [
+		{
+			"name": "AGREGAR",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhNzg3NWJlMjc2MTYwZDc0OTI4OGEiLCJpYXQiOjE3NDE0MjA4MzcsImV4cCI6MTc0MTQyNDQzN30.TUqrXvn7rbUoCZqLgdlteIcSU0q2iDrWgZcELIzxOQA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Teclado de computadora\",\r\n    \"price\": 150,\r\n    \"description\":\"Teclas RGB\",\r\n    \"category\":\"67ca97abadca64fd49760195\",\r\n    \"stock\": 50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/proyectoFinal/v1/producto/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"proyectoFinal",
+						"v1",
+						"producto",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AGOTADOS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhNzg3NWJlMjc2MTYwZDc0OTI4OGEiLCJpYXQiOjE3NDE0MjMyNTYsImV4cCI6MTc0MTQyNjg1Nn0.rABp3zl9Ubvf4p77VgofND7dHdnESEqqP8hp5Iitgow",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/proyectoFinal/v1/producto/agotados",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"proyectoFinal",
+						"v1",
+						"producto",
+						"agotados"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhNzg3NWJlMjc2MTYwZDc0OTI4OGEiLCJpYXQiOjE3NDEzMzUxMzQsImV4cCI6MTc0MTMzODczNH0.ulpD6il1iI7bP_kmlv5D-ys9fzQg7R1wXqQr_Ixp6kM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\":\"Dulce\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/proyectoFinal/v1/producto/67caa5ccdcdb4487a44a57ad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"proyectoFinal",
+						"v1",
+						"producto",
+						"67caa5ccdcdb4487a44a57ad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VER",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/proyectoFinal/v1/producto/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"proyectoFinal",
+						"v1",
+						"producto",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhNzg3NWJlMjc2MTYwZDc0OTI4OGEiLCJpYXQiOjE3NDEzMzUxMzQsImV4cCI6MTc0MTMzODczNH0.ulpD6il1iI7bP_kmlv5D-ys9fzQg7R1wXqQr_Ixp6kM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/proyectoFinal/v1/producto/67ca9fafdcdb4487a44a57a3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"proyectoFinal",
+						"v1",
+						"producto",
+						"67ca9fafdcdb4487a44a57a3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MVENDIDO",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhNzg3NWJlMjc2MTYwZDc0OTI4OGEiLCJpYXQiOjE3NDE0MjMyNTYsImV4cCI6MTc0MTQyNjg1Nn0.rABp3zl9Ubvf4p77VgofND7dHdnESEqqP8hp5Iitgow",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/proyectoFinal/v1/producto/masVendidos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"proyectoFinal",
+						"v1",
+						"producto",
+						"masVendidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "COMPRAR",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cantidad\":\"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/proyectoFinal/v1/producto/comprar/67ca9fafdcdb4487a44a57a3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"proyectoFinal",
+						"v1",
+						"producto",
+						"comprar",
+						"67ca9fafdcdb4487a44a57a3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

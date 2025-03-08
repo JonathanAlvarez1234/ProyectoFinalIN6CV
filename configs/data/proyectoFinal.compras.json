@@ -1,0 +1,50 @@
+[{
+  "_id": {
+    "$oid": "67cbf70b7f601f12b2d7cf4f"
+  },
+  "usuario": {
+    "$oid": "67ca8f8b92da62bc82be0af5"
+  },
+  "productos": [
+    {
+      "producto": {
+        "$oid": "67caa5ccdcdb4487a44a57ad"
+      },
+      "cantidad": 3,
+      "price": 300,
+      "_id": {
+        "$oid": "67cbf70b7f601f12b2d7cf50"
+      }
+    }
+  ],
+  "total": 900,
+  "fecha": {
+    "$date": "2025-03-08T07:51:39.075Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67cc0280d746282f0dc1cd46"
+  },
+  "usuario": {
+    "$oid": "67cbd2380f86413dad8da250"
+  },
+  "productos": [
+    {
+      "producto": {
+        "$oid": "67cbf995f7654682c9db73c1"
+      },
+      "cantidad": 2,
+      "price": 150,
+      "_id": {
+        "$oid": "67cc0280d746282f0dc1cd47"
+      }
+    }
+  ],
+  "total": 300,
+  "fecha": {
+    "$date": "2025-03-08T08:40:32.764Z"
+  },
+  "__v": 0
+}]

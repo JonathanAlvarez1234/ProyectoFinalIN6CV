@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "c4359677-fd3b-4236-97eb-b4fc67c3908d",
+		"name": "CATEGORIAS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37557519"
+	},
+	"item": [
+		{
+			"name": "CREATE",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhNzg3NWJlMjc2MTYwZDc0OTI4OGEiLCJpYXQiOjE3NDEzMzAxODMsImV4cCI6MTc0MTMzMzc4M30._NgTRvov_etHX8wqRZLNR1717rj832wbnAp6E1wSfWA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Dispositivos Tecnologicos\",\r\n    \"descripcion\":\"Lo mejor de la tecnologia moderna\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/proyectoFinal/v1/categoria/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"proyectoFinal",
+						"v1",
+						"categoria",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VER",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/proyectoFinal/v1/categoria/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"proyectoFinal",
+						"v1",
+						"categoria",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ACTUALIZAR",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhNzg3NWJlMjc2MTYwZDc0OTI4OGEiLCJpYXQiOjE3NDEzMzA1MDMsImV4cCI6MTc0MTMzNDEwM30.cUoDPHZ8JuHMuVAt__Ryw6WxxZnLPU3pqy2IJXtOm5Y",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"descripcion\":\"Saludables y de la mejor calidad\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/proyectoFinal/v1/categoria/67ca81bd2086cd11035bd1f7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"proyectoFinal",
+						"v1",
+						"categoria",
+						"67ca81bd2086cd11035bd1f7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ELIMINAR",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhNzg3NWJlMjc2MTYwZDc0OTI4OGEiLCJpYXQiOjE3NDEzMzA1MDMsImV4cCI6MTc0MTMzNDEwM30.cUoDPHZ8JuHMuVAt__Ryw6WxxZnLPU3pqy2IJXtOm5Y",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/proyectoFinal/v1/categoria/67ca9717adca64fd49760191",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"proyectoFinal",
+						"v1",
+						"categoria",
+						"67ca9717adca64fd49760191"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,4 +1,3 @@
-//import { hash } from "argon2";
 import Usuario from "./user.model.js";
 
 export const getUsers = async (req, res) => {
