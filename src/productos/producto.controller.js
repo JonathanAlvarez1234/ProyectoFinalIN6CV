@@ -50,7 +50,7 @@ export const saveProducto = async (req, res) => {
 
 export const getProductos = async (req, res) => {
     try {
-        const productos = await Producto.find()
+        const productos = await Producto.find({ state: true })
        .populate('category', 'name');
         res.status(200).json({
             success: true,
