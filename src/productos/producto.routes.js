@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { saveProducto, getProductos, updateProducto, deleteProducto, productosAgotados, comprarProducto, productosMasVendidos } from "./producto.controller.js";
+import { saveProducto, getProductos, updateProducto, deleteProducto, productosAgotados, productosMasVendidos } from "./producto.controller.js";
 import { validarJWT } from "../middlewares/validar-jwt.js";
 import { validarCampos } from "../middlewares/validar-campos.js";
 
@@ -35,8 +35,6 @@ router.delete(
     deleteProducto
 );
 
-router.put("/comprar/:id", comprarProducto)
-
-router.get("/masVendidos", productosMasVendidos)
+router.get("/masVendidos", validarJWT ,productosMasVendidos)
 
 export default router;

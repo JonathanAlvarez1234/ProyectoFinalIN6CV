@@ -1,5 +1,6 @@
 import Compra from "../Compras-facturas/compra.model.js"
 import Carrito from "../carritos/carrito.model.js"
+import Producto from "../productos/producto.model.js"
 
 export const compraCarrito = async (req, res) => {
     try {
@@ -8,25 +9,30 @@ export const compraCarrito = async (req, res) => {
         if (!carrito || carrito.productos.length === 0) {
             return res.status(400).json({
                 success: false,
-                message: "El carrito está vacío, no se puede realizar la compra"
+                message: "El carrito esta vacio, no se puede realizar la compra"
             });
         }
         let total = 0;
-        const productosCompra = carrito.productos.map(item => {
+        const productosCompra = [];
+
+        for (const item of carrito.productos) {
             total += item.producto.price * item.cantidad;
-            return {
+            productosCompra.push({
                 producto: item.producto._id,
                 cantidad: item.cantidad,
                 price: item.producto.price
-            };
-        });
+            });
+            await Producto.findByIdAndUpdate(item.producto._id, {
+                $inc: { numVenta: item.cantidad }
+            });
+        }
         const nuevaCompra = new Compra({
             usuario: usuarioId,
             productos: productosCompra,
             total
         });
         await nuevaCompra.save();
-        // Vaciar el carrito después de la compra
+
         await Carrito.findOneAndUpdate({ usuario: usuarioId }, { productos: [] });
         res.status(200).json({
             success: true,
@@ -44,6 +50,7 @@ export const compraCarrito = async (req, res) => {
                 fecha: nuevaCompra.fecha
             }
         });
+
     } catch (error) {
         res.status(500).json({
             success: false,

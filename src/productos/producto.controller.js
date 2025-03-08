@@ -179,62 +179,20 @@ export const productosAgotados = async (req, res) => {
     }
 };
 
-export const comprarProducto = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { cantidad } = req.body;
-        if (!cantidad || cantidad <= 0) {
-            return res.status(400).json({
-                success: false,
-                msg: "La cantidad debe ser mayor a 0"
-            });
-        }
-        const producto = await Producto.findById(id);
-        if (!producto) {
-            return res.status(404).json({
-                success: false,
-                msg: "Producto no encontrado"
-            });
-        }
-        if (producto.stock < cantidad) {
-            return res.status(400).json({
-                success: false,
-                msg: "Stock insuficiente"
-            });
-        }
-        producto.stock -= cantidad;
-        producto.numVenta += cantidad;
-        await producto.save();
-        res.status(200).json({
-            success: true,
-            msg: "Compra realizada exitosamente",
-            producto
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            msg: "Error al realizar la compra",
-            error: error.message
-        });
-    }
-};
-
 export const productosMasVendidos = async (req, res) => {
     try {
         const productos = await Producto.find()
             .sort({ numVenta: -1 })
             .limit(10);
-
         res.status(200).json({
             success: true,
-            msg: "Productos mas vendidos",
+            msg: "Productos más vendidos",
             productos
         });
-
     } catch (error) {
         res.status(500).json({
             success: false,
-            msg: "Error al obtener los productos mas vendidos",
+            msg: "Error al obtener los productos más vendidos",
             error: error.message
         });
     }
