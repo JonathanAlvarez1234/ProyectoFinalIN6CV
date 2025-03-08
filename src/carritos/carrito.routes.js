@@ -1,9 +1,9 @@
-import { Route } from "express";
+import { Router } from "express";
 import { agregarAlCarrito, getMyCarrito, eliminarProdDeCarrito, vaciarCarrito } from "./carrito.controller.js";
 import { validarJWT } from "../middlewares/validar-jwt.js";
 import { validarCampos } from "../middlewares/validar-campos.js";
 
-const router = Route();
+const router = Router();
 
 router.get(
     "/",
@@ -23,7 +23,7 @@ router.post(
 );
 
 router.delete(
-    "/:id",
+    "/:productoId",
     [
         validarJWT,
         validarCampos
@@ -32,7 +32,7 @@ router.delete(
 );
 
 router.delete(
-    "/vaciar",
+    "/vaciar/:usuarioId",
     [
         validarJWT,
         validarCampos

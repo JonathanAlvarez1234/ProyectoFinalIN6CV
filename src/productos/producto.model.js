@@ -4,8 +4,7 @@ const productSchema = Schema(
     {
         name: {
             type: String,
-            required: true,
-            maxLength: 20
+            required: true
         },
         price: {
             type: Number,

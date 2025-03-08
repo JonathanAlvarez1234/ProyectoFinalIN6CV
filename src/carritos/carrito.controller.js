@@ -19,35 +19,36 @@ export const agregarAlCarrito = async (req, res) => {
                 message: "Stock insuficiente"
             });
         }
+
         let carrito = await Carrito.findOne({ usuario: usuarioId });
         if (!carrito) {
             carrito = new Carrito({
                 usuario: usuarioId,
-                productos: [{ producto: productoId, cantidad }],
-                total: producto.price * cantidad
+                productos: [{ producto: productoId, cantidad }]
             });
         } else {
             const itemIndex = carrito.productos.findIndex(
                 (item) => item.producto.toString() === productoId
             );
+
             if (itemIndex !== -1) {
                 carrito.productos[itemIndex].cantidad += cantidad;
             } else {
                 carrito.productos.push({ producto: productoId, cantidad });
             }
-
-            carrito.total = carrito.productos.reduce(
-                async (acc, item) => {
-                    const prod = await Producto.findById(item.producto);
-                    return acc + prod.price * item.cantidad;
-                },
-                0
-            );
         }
+        producto.stock -= cantidad;
+        await producto.save();
+        let total = 0;
+        for (const item of carrito.productos) {
+            const prod = await Producto.findById(item.producto);
+            total += prod.price * item.cantidad;
+        }
+        carrito.total = total;
         await carrito.save();
         res.status(200).json({
             success: true,
-            message: "Producto agregado al carrito",
+            message: "Producto agregado al carrito y stock actualizado",
             carrito
         });
     } catch (error) {
