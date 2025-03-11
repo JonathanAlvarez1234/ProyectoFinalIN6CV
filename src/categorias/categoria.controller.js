@@ -134,7 +134,10 @@ export const createCategory = async () => {
     try {
         const defaultCategory = await Categoria.findOne({ name: "General" });
         if (!defaultCategory) {
-            await Categoria.create({ name: "General" });
+            await Categoria.create({ 
+                name: "General", 
+                descripcion: "Categoría predeterminada"
+            });
             console.log("Categoria 'General' creada por defecto");
         } else {
             console.log("Categoria por defecto ya existente");

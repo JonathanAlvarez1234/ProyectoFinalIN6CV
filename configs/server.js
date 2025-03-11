@@ -7,6 +7,7 @@ import morgan from "morgan";
 import { dbConnection } from "./mongo.js";
 import limiter from '../src/middlewares/validar-cant-peticiones.js'
 import { createCategory } from "../src/categorias/categoria.controller.js";
+import { crateAdmin } from "../src/users/user.controller.js";
 import authRoutes from '../src/auth/auth.routes.js'
 import usuarioRoutes from '../src/users/user.routes.js'
 import categoriaRoutes from '../src/categorias/categoria.routes.js'
@@ -50,6 +51,7 @@ export const initServer = async () => {
         await conectarDB();
         routes(app);
         await createCategory();
+        await crateAdmin();
         app.listen(port);
         console.log(`Server running on port: ${port}`);
     } catch (err) {

@@ -1,4 +1,5 @@
 import Usuario from "./user.model.js";
+import { hash } from "argon2";
 
 export const getUsers = async (req, res) => {
     try {
@@ -89,5 +90,29 @@ export const deleteUser = async (req, res) => {
             msg: 'Error al eliminar usuario',
             error
         });
+    }
+};
+
+export const crateAdmin = async () => {
+    try {
+        const adminD = await Usuario.findOne({ role: "ADMIN_ROLE" });
+        if(!adminD){
+            const passwordEncrypted = await hash("Jonas360");
+            const admin = new Usuario({
+                name: "Admin",
+                surname: "istrador",
+                username: "4dmin",
+                email: "admin@gmail.com",
+                password: passwordEncrypted,
+                phone: "51316646",
+                role: "ADMIN_ROLE",
+            });
+            await admin.save();
+            console.log("Administrador iniciado");
+        } else {
+            console.log("Administrador activo");
+        }
+    } catch (error) {
+        console.error("Error creando administrador:", error);
     }
 };
