@@ -1,5 +1,6 @@
 import Usuario from "./user.model.js";
 import { hash } from "argon2";
+import mongoose from "mongoose";
 
 export const getUsers = async (req, res) => {
     try {
@@ -31,11 +32,46 @@ export const getUsers = async (req, res) => {
     }
 };
 
+export const getUserById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        if (!mongoose.isValidObjectId(id)) {
+            return res.status(400).json({
+                success: false,
+                msg: "ID de usuario invalido"
+            });
+        }
+        if (req.usuario._id.toString() !== id && req.usuario.role !== "ADMIN_ROLE") {
+            return res.status(403).json({
+                success: false,
+                msg: "No tiene permisos para ver los datos de otro usuario"
+            });
+        }
+        const user = await Usuario.findById(id);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                msg: "Usuario no encontrado"
+            });
+        }
+        res.status(200).json({
+            success: true,
+            user
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            msg: "Error al obtener el usuario",
+            error: error.message
+        });
+    }
+};
+
 export const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
         const { _id, password, email, role, ...data } = req.body;
-        if (req.usuario.role !== "ADMIN_ROLE") {
+        if (req.usuario._id.toString() !== id && req.usuario.role !== "ADMIN_ROLE") {
             return res.status(403).json({
                 success: false,
                 msg: "Solo un administrador puede actualizar roles"
